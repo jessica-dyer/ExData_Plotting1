@@ -1,4 +1,6 @@
+# Source "data loading" to load data. If data is already loaded, it will use the cache. 
 source("data_loading.R")
+
 png("plot4.png")
 
 par(mfrow = c(2,2))

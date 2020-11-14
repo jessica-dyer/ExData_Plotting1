@@ -1,4 +1,6 @@
+# Source "data loading" to load data. If data is already loaded, it will use the cache. 
 source("data_loading.R")
+
 png("plot2.png", width = 480, height = 480)
 
 par(pty = "s")

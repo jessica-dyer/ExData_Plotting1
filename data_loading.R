@@ -57,8 +57,6 @@ if(!exists("filtered_df")) {
   filtered_df <- theEasierWay(filtered_df)
 }
 
-theEasierWay(filtered_df)
-
 # Another option for the datetime object----
 # filtered_df$datetime <- paste(filtered_df$Date, filtered_df$Time, sep = " ")
 # filtered_df$datetime <- dmy_hms(filtered_df$datetime)
