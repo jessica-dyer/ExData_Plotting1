@@ -1,9 +1,9 @@
 source("data_loading.R")
-png("plot4.png", width = 480, height = 480)
+png("plot4.png")
 
 par(mfrow = c(2,2))
-par(mar = c(2,0,2,0))
-par(pty = "s")
+#par(mar = c(2,0,2,0))
+par(pty = "m")
 plot1 <- plot(filtered_df$date_object, filtered_df$Global_active_power,  
                        type = "l",
                        ylab = "Global Active Power (kilowatts)",
