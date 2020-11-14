@@ -6,6 +6,7 @@ library(dplyr)
 library(readr)
 library(plyr)
 library(glue)
+library(lubridate)
 
 #******************************************************************
 #Step 1. Downloading & unzipping data
@@ -55,3 +56,10 @@ if(!exists("filtered_df")) {
   # 5. Create a date/time object 
   filtered_df <- theEasierWay(filtered_df)
 }
+
+theEasierWay(filtered_df)
+
+# Another option for the datetime object----
+# filtered_df$datetime <- paste(filtered_df$Date, filtered_df$Time, sep = " ")
+# filtered_df$datetime <- dmy_hms(filtered_df$datetime)
+
