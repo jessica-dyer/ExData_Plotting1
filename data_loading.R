@@ -24,8 +24,33 @@ household_power_consumption <- read.table("data/household_power_consumption.txt"
 
 # # 3. Subset the data for dates 2007-02-01 & 2007-02-02
 # # 3. Adjust variables
-# household_power_consumption <- mutate(household_power_consumption, Time = strptime(household_power_consumption$Time, "%H:%M:%S"))
+# household_power_consumption$date_object <- mutate(household_power_consumption, date_object = strptime(household_power_consumption$Time, "%H:%M:%S"))
 # 
+
+parseDateFrom <- function(dayString, timeString) {
+  myDateFormat <- "%d/%m/%Y %H:%M:%S"
+  combinedStrings <- glue(dayString, timeString, .sep=" ")
+  myDateObject <- strptime(combinedStrings, myDateFormat)
+  return(myDateObject)
+}
+dateObjectToUTFFormattedString <- function(dateObject) {
+  utcDateFormat <- "%Y-%m-%dT%H:%M:%S"
+  str <- strftime(dateObject, utcDateFormat)
+}
+
+theEasierWay<-function(myDf) {
+  for (row in nrow(myDf)) {
+    myDateObject <- parseDateFrom(myDf$Date[row], myDf$Time[row]) 
+    myDf$date_object[row] <- dateObjectToUTFFormattedString(myDateObject)
+  }
+  return(myDf)
+}
+
+samllDF <- mutate(smallDf, date_object = strptime(glue(smallDf$Date, smallDf$Time, .sep=" "), myDateFormat))
+samllDF <- mutate(smallDf, date_object = c(1:6))
+samllDF <- mutate(smallDf, date_object = glue(Date, Time, .sep=" "))
+
+whatIsThis <- apply(smallDf, MARGIN=1, FUN=function(x){x})
 
 dayAndTimeStringCombined <- glue(household_power_consumption$Date[1], household_power_consumption$Time[1], .sep=" ")
 dayOnlyObject <- strptime(household_power_consumption$Date[1], "%d/%m/%Y" )
@@ -33,3 +58,6 @@ myDateObject <- strptime(dayAndTimeStringCombined, "%d/%m/%Y %H:%M:%S")
 backToString <- strftime(myDateObject, "%d/%m/%Y %H:%M:%S")
 dateAsStringDifferentFormat <- strftime(myDateObject, "%Y-%m-%dT%H:%M:%S")
 # Date <- as.Date(household_power_consumption$Date, "%d/%m/%y")
+
+smallDf <- head(household_power_consumption)
+#smallDf$date_object <- 
