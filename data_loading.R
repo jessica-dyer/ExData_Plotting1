@@ -61,3 +61,6 @@ if(!exists("filtered_df")) {
 # filtered_df$datetime <- paste(filtered_df$Date, filtered_df$Time, sep = " ")
 # filtered_df$datetime <- dmy_hms(filtered_df$datetime)
 
+# Third solution for the datetime object----
+# filtered_df$datetime <- strptime(paste(filtered_df$Date, filtered_df$Time, sep=" "), "%d/%m/%Y %H:%M:%S")
+
